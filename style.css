@@ -1,0 +1,30 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background: #101827;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+.app {
+  max-width: 420px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #1e293b;
+  border-radius: 20px;
+}
+
+button, select {
+  padding: 12px;
+  margin: 8px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+button {
+  background: #22c55e;
+  color: #102015;
+  cursor: pointer;
+}
