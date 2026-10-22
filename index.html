@@ -1,0 +1,55 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mudasar AI Voice Assistant</title>
+<style>
+body{margin:0;background:#0f172a;color:white;font-family:Arial;text-align:center;padding:30px 15px}
+.box{max-width:420px;margin:25px auto;background:#1e293b;padding:25px 15px;border-radius:20px}
+button,select{padding:13px;margin:8px;border-radius:10px;font-size:16px}
+button{background:#22c55e;border:0;cursor:pointer}
+#reply{margin-top:20px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>🎙️ Mudasar AI Voice Assistant</h1>
+<p>Select your language</p>
+<select id="lang">
+<option value="en-US">English</option>
+<option value="ur-PK">Urdu</option>
+<option value="hi-IN">Hindi</option>
+</select>
+<br>
+<button onclick="listen()">🎤 Listen</button>
+<button onclick="speak()">🔊 Reply</button>
+<p id="reply">Hello! Your assistant is ready.</p>
+</div>
+<script>
+function speak(text){
+let lang=document.getElementById('lang').value;
+let msg=text||({'en-US':'Hello! I am your voice assistant.','ur-PK':'السلام علیکم، میں آپ کا وائس اسسٹنٹ ہوں۔','hi-IN':'नमस्ते, मैं आपका वॉइस असिस्टेंट हूँ।'}[lang]);
+document.getElementById('reply').textContent=msg;
+let speech=new SpeechSynthesisUtterance(msg);
+speech.lang=lang;
+speechSynthesis.speak(speech);
+}
+function listen(){
+let R=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!R){document.getElementById('reply').textContent='Please use Google Chrome.';return;}
+let r=new R();
+r.lang=document.getElementById('lang').value;
+r.onresult=e=>{
+let words=e.results[0][0].transcript;
+document.getElementById('reply').textContent='You said: '+words;
+speak(words);
+};
+r.onerror=()=>document.getElementById('reply').textContent='Please allow microphone access.';
+r.start();
+}
+</script>
+</body>
+</html>
+```
